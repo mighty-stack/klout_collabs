@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ProjectNav from '../components/ProjectNav.jsx';
 import { Wordmark } from '../components/ui.jsx';
 import { warmUp } from '../api/client.js';
 import {
@@ -71,13 +72,7 @@ export default function Landing() {
 
   return (
     <>
-      <header className="nav">
-        <Wordmark />
-        <nav>
-          <a href="#about" className="hide-m">About</a>
-          <Link to="/login">Log in</Link>
-        </nav>
-      </header>
+      <ProjectNav />
 
       <section ref={intro.ref} className={revealClass('intro', intro)}>
         <h1 className="hero-title">Brands and creators, reviewed and in one place.</h1>

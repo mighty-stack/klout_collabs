@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../../context/Auth.jsx';
 import { useToast } from '../../context/Toast.jsx';
 import { useOptions } from '../../lib/useOptions.js';
@@ -144,19 +144,12 @@ function ChangePassword() {
 }
 
 export default function Profile() {
-  const { user, setUser } = useAuth();
+  const { user, profile, setProfile, setUser, profileLoading, profileError, refreshProfile } = useAuth();
   const { options } = useOptions();
-  const [profile, setProfile] = useState(undefined);
   const [editing, setEditing] = useState(false);
 
-  useEffect(() => {
-    let alive = true;
-    api('/profile').then((d) => { if (alive) { setProfile(d.profile); setUser(d.user); } });
-    return () => { alive = false; };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (profile === undefined || !options) return <div className="card"><Splash /></div>;
+  if (profileLoading || (!profile && !profileError)) return <div className="card"><Splash /></div>;
+  if (!profile) return <div className="card profile-load-error"><p className="form-error" role="alert">{profileError || 'Your profile could not be loaded.'}</p><Button className="blue" onClick={refreshProfile}>Try again</Button></div>;
   const status = STATUS[user.verificationStatus];
 
   return (
@@ -165,7 +158,7 @@ export default function Profile() {
         <div className="card">
           <div className="flex justify-between items-start gap-3">
             <div><h2>Your profile</h2><p className="card-lede">What brands and the Klout Collabs team see about you.</p></div>
-            {!editing && <button className="btn line sm" onClick={() => setEditing(true)}>Edit</button>}
+            {!editing && <button className="btn line sm" onClick={() => setEditing(true)} disabled={!options}>Edit</button>}
           </div>
           {editing ? (
             <EditForm
@@ -188,6 +181,7 @@ export default function Profile() {
             </div>
             <dl className="kv mt-4.5">
               <div><dt>Account type</dt><dd>{user.role === 'brand' ? 'Brand' : 'Creator'}</dd></div>
+              <div><dt>Login email</dt><dd>{user.email}</dd></div>
               <div><dt>Registered</dt><dd>{formatDate(user.createdAt)}</dd></div>
               {user.verifiedAt && <div><dt>Verified on</dt><dd>{formatDate(user.verifiedAt)}</dd></div>}
             </dl>

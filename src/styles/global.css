@@ -1366,3 +1366,68 @@
     animation: none;
   }
 }
+@layer components {
+  .site-nav {
+    @apply flex items-center justify-between gap-5 px-10 py-4 bg-ink text-white;
+    min-height: 76px;
+    box-sizing: border-box;
+  }
+  .site-nav .wordmark {
+    @apply flex-none;
+  }
+  .site-nav .wordmark i {
+    @apply text-gold;
+  }
+  .site-nav-links {
+    @apply flex flex-1 items-center justify-center gap-5 font-medium;
+  }
+  .site-nav-links a {
+    @apply whitespace-nowrap transition-colors duration-150;
+  }
+  .site-nav-links a:hover,
+  .site-nav-links a.active {
+    @apply text-gold;
+  }
+  .site-nav-account {
+    @apply flex flex-none items-center gap-2.5;
+  }
+  .site-nav-person {
+    @apply grid min-w-0 text-sm leading-tight;
+  }
+  .site-nav-person b {
+    @apply max-w-40 truncate text-white;
+  }
+  .site-nav-person small {
+    @apply text-mist capitalize;
+  }
+  .count-badge {
+    @apply bg-gold text-ink rounded-full text-xs px-2 py-px font-bold;
+  }
+  .adm {
+    @apply block min-h-screen;
+  }
+  .adm-body {
+    @apply mx-auto w-full max-w-[1400px] px-8 pt-7 pb-16 min-w-0;
+    box-sizing: border-box;
+  }
+  .profile-load-error {
+    @apply grid justify-items-start gap-4;
+  }
+  @media (max-width: 900px) {
+    .site-nav {
+      @apply flex-wrap px-4 py-3;
+    }
+    .site-nav-links {
+      @apply order-3 w-full justify-start overflow-x-auto pb-1;
+    }
+    .site-nav-account {
+      @apply ml-auto;
+    }
+    .site-nav-person {
+      @apply hidden;
+    }
+    .adm-body {
+      @apply px-4 pt-5 pb-14;
+    }
+  }
+}
