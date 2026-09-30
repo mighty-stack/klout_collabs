@@ -67,9 +67,9 @@ function EditForm({ user, profile, options, onSaved, onCancel }) {
     try {
       const payload = isBrand ? brandPayload(form.values) : creatorPayload(form.values);
       if (emailField.trim() !== user.email) payload.email = emailField.trim();
-      const { profile: updated } = await api('/profile', { method: 'PATCH', body: payload });
+      const { user: updatedUser, profile: updatedProfile } = await api('/profile', { method: 'PATCH', body: payload });
       toast('Profile updated.');
-      onSaved(updated);
+      onSaved(updatedUser, updatedProfile);
     } catch (err) {
       if (!(err instanceof ApiError)) throw err;
       const fields = err.fields || {};
@@ -164,7 +164,11 @@ export default function Profile() {
             <EditForm
               user={user} profile={profile} options={options}
               onCancel={() => setEditing(false)}
-              onSaved={(updated) => { setProfile(updated); setEditing(false); api('/auth/me').then((d) => setUser(d.user)); }}
+              onSaved={(updatedUser, updatedProfile) => {
+                setUser(updatedUser);
+                setProfile(updatedProfile);
+                setEditing(false);
+              }}
             />
           ) : user.role === 'brand' ? <BrandView profile={profile} /> : <CreatorView profile={profile} />}
         </div>
