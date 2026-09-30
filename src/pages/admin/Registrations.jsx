@@ -63,6 +63,17 @@ export default function Registrations() {
   }, [tab, debouncedQ, category, location, page, onlyUnseen]);
 
   useEffect(() => { setList(null); load(); }, [load]);
+  useEffect(() => {
+    const refreshWhenVisible = () => {
+      if (!document.hidden) load();
+    };
+    const interval = window.setInterval(refreshWhenVisible, 30_000);
+    window.addEventListener('focus', refreshWhenVisible);
+    return () => {
+      window.clearInterval(interval);
+      window.removeEventListener('focus', refreshWhenVisible);
+    };
+  }, [load]);
   useEffect(() => { setPage(1); }, [tab, debouncedQ, category, location, onlyUnseen]);
 
   const openDetail = async (id) => {
