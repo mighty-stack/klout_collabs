@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { Wordmark, cx } from './ui.jsx';
 import { initial } from '../lib/format.js';
 
-export default function ProjectNav({ user, unseen = 0, onLogout }) {
+export default function ProjectNav({ user, unseen = 0, onLogout, landing = false }) {
   const admin = user?.role === 'admin';
   const member = user && !admin;
   const home = admin ? '/admin/registrations' : member ? '/app' : '/';
@@ -11,7 +11,13 @@ export default function ProjectNav({ user, unseen = 0, onLogout }) {
     <header className="site-nav">
       <Wordmark to={home} />
       <nav className="site-nav-links" aria-label="Primary navigation">
-        {!user ? (
+        {!user ? landing ? (
+          <>
+            <a href="#about">About</a>
+            <Link to="/login">Log in</Link>
+            <a className="nav-register" href="#register">Register</a>
+          </>
+        ) : (
           <>
             <a href="#about">About</a>
             <Link to="/login">Log in</Link>

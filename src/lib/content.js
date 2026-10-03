@@ -10,6 +10,12 @@ export const HOW_IT_WORKS = [
   { title: 'See opportunities', text: 'Log in to manage your profile and view current collaboration opportunities.' },
 ];
 
+export const PROCESS_NODES = [
+  { title: 'Brand or creator', text: 'Registers a profile', symbol: 'B', tone: 'brand' },
+  { title: 'Klout Collabs', text: 'Reviews every profile', symbol: '✓', tone: 'klout' },
+  { title: 'Verified member', text: 'Sees opportunities', symbol: '★', tone: 'verified' },
+];
+
 export const BENEFITS_INTRO = [
   'Why brands and creators choose Klout Collabs',
   'A more considered way to meet, built around reviewed profiles and clear expectations.',
@@ -31,26 +37,23 @@ export const FAQS = [
   { question: 'What happens after approval?', answer: 'Your profile becomes available to the Klout Collabs team, and you can log in to view current collaboration opportunities.' },
 ];
 
-export const FOOTER_COLUMNS = [
-  { title: 'Klout Collabs', description: 'A reviewed space for brands and creators to find better-fit collaborations.' },
-  {
-    title: 'Quick links',
-    links: [
-      { label: 'About', to: '#about' },
-      { label: 'Log in', to: '/login' },
-      { label: 'Register brand', to: '/register/brand' },
-      { label: 'Register creator', to: '/register/creator' },
-    ],
-  },
-  {
-    title: 'For members',
-    links: [
-      { label: 'Help center', to: '#help-center' },
-      { label: 'Contact', to: '#contact' },
-      { label: 'FAQ', to: '#faq' },
-    ],
-  },
-];
+export const CONTACT_EMAIL = 'hello@example.com';
+
+export const FOOTER_DESCRIPTION = 'A reviewed space for brands and creators to find better-fit collaborations.';
+
+export const FOOTER_LINKS = {
+  'Quick links': [
+    { label: 'About', to: '#about' },
+    { label: 'Log in', to: '/login' },
+    { label: 'Register brand', to: '/register/brand' },
+    { label: 'Register creator', to: '/register/creator' },
+  ],
+  'For members': [
+    { label: 'Help center', to: '#help-center' },
+    { label: 'Contact', to: '#contact' },
+    { label: 'FAQ', to: '#faq' },
+  ],
+};
 
 export const FOOTER_SOCIALS = [
   { label: 'X', icon: 'x' },
